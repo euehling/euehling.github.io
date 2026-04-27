@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emily Uehling — RPA Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #e8e8f0;
+    --muted: #7a7a9a;
+    --accent: #6ee7b7;
+    --accent2: #818cf8;
+    --accent3: #f472b6;
+    --gold: #fbbf24;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Outfit', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 7rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .hero-title-accent {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent2);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 2rem 0 3rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0f0a;
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: #4dd4a0; }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-hover);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.25rem;
+    color: var(--text);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.35rem;
+  }
+
+  /* ABOUT */
+  #about { border-top: 1px solid var(--border); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    font-weight: 300;
+    line-height: 1.85;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .highlight-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 1.5rem 1.75rem;
+    margin-top: 1.5rem;
+  }
+  .highlight-card .big-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .highlight-card p {
+    color: var(--muted) !important;
+    font-size: 14px;
+    margin-top: 0.5rem;
+    margin-bottom: 0 !important;
+  }
+
+  /* SKILLS */
+  #skills { border-top: 1px solid var(--border); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .skill-group {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .skill-group:hover { border-color: var(--border-hover); }
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.3rem 0.65rem;
+    font-weight: 400;
+  }
+  .skill-tag.featured {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* EXPERIENCE */
+  #experience { border-top: 1px solid var(--border); }
+  .exp-timeline { margin-top: 3rem; }
+  .exp-company {
+    margin-bottom: 3.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--border);
+  }
+  .exp-company-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1.5rem;
+  }
+  .exp-role {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-role:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .exp-role-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .exp-role-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    color: var(--text);
+  }
+  .exp-dates {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 0.4rem 0;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.7;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  .exp-bullets li strong { color: var(--text); font-weight: 500; }
+  .impact-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(110,231,183,0.08);
+    border: 1px solid rgba(110,231,183,0.25);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.3rem 0.75rem;
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .early-career {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .early-career p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* PROJECTS */
+  #projects { border-top: 1px solid var(--border); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: border-color 0.25s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+  }
+  .project-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .project-icon {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+  .project-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.75;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.2rem 0.5rem;
+  }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 1.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* EDUCATION */
+  #education { border-top: 1px solid var(--border); }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .edu-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+  }
+  .edu-school {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .edu-degree {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+  .edu-detail {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .cert-card {
+    background: rgba(251,191,36,0.05);
+    border: 1px solid rgba(251,191,36,0.2);
+    border-radius: 8px;
+    padding: 1.75rem;
+  }
+  .cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .cert-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+
+  /* CONTACT */
+  #contact {
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  #contact h2 { margin-bottom: 1rem; }
+  .contact-sub {
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    font-size: 15px;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.5rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+    .exp-role-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ENTRANCE PAGE -->
+<div id="entrance">
+  <canvas id="particle-canvas"></canvas>
+  <div class="entrance-content">
+    <div class="entrance-eyebrow">initializing portfolio<span class="blink">_</span></div>
+    <h1 class="entrance-name" id="entrance-name"></h1>
+    <div class="entrance-title" id="entrance-title"></div>
+    <button class="entrance-btn" id="entrance-btn" onclick="enterSite()">
+      <span>enter</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  #entrance {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #0a0a0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #entrance.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  #particle-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .entrance-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+  }
+  .entrance-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 0.3s both;
+  }
+  .blink {
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .entrance-name {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 7vw, 5rem);
+    color: var(--text);
+    line-height: 1.05;
+    min-height: 1.2em;
+    margin-bottom: 1rem;
+  }
+  .entrance-name .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 0.85em;
+    background: var(--accent);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 0.7s step-end infinite;
+  }
+  .entrance-title {
+    font-family: var(--mono);
+    font-size: clamp(13px, 2vw, 16px);
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    min-height: 1.5em;
+    margin-bottom: 3rem;
+  }
+  .entrance-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .entrance-btn.visible { opacity: 1; pointer-events: all; animation: fadeIn 0.5s ease both; }
+  .entrance-btn:hover { background: var(--accent); color: #0a0f0a; }
+</style>
+
+<script>
+  // PARTICLES
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animFrame;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function createParticles() {
+    particles = [];
+    const count = Math.floor((window.innerWidth * window.innerHeight) / 12000);
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.5 + 0.1
+      });
+    }
+  }
+  createParticles();
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const connectDist = 120;
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(110,231,183,${p.opacity})`;
+      ctx.fill();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < connectDist) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(129,140,248,${0.15 * (1 - dist / connectDist)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    animFrame = requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+  // TYPEWRITER
+  const nameEl = document.getElementById('entrance-name');
+  const titleEl = document.getElementById('entrance-title');
+  const btn = document.getElementById('entrance-btn');
+  const fullName = 'Emily Uehling';
+  const fullTitle = 'RPA Developer & Data Scientist';
+  let ni = 0, ti = 0;
+
+  function typeName() {
+    if (ni <= fullName.length) {
+      nameEl.innerHTML = fullName.slice(0, ni) + '<span class="cursor"></span>';
+      ni++;
+      setTimeout(typeName, ni === 1 ? 600 : 80);
+    } else {
+      setTimeout(typeTitle, 400);
+    }
+  }
+
+  function typeTitle() {
+    if (ti <= fullTitle.length) {
+      titleEl.textContent = fullTitle.slice(0, ti);
+      ti++;
+      setTimeout(typeTitle, 55);
+    } else {
+      btn.classList.add('visible');
+    }
+  }
+
+  setTimeout(typeName, 800);
+
+  function enterSite() {
+    document.getElementById('entrance').classList.add('hidden');
+    cancelAnimationFrame(animFrame);
+    document.body.style.overflow = 'auto';
+  }
+
+  document.body.style.overflow = 'hidden';
+</script>
+
+<nav>
+  <a class="nav-logo" href="#hero">eu.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow fade-up">Available for new opportunities</div>
+  <h1 class="fade-up delay-1">Emily<br><span class="hero-title-accent">Uehling</span></h1>
+  <p class="hero-sub fade-up delay-2">RPA Developer &amp; Data Scientist bridging the gap between business operations and intelligent automation — with a passion for healthcare technology that makes a real difference.</p>
+  <div class="hero-cta fade-up delay-3">
+    <a href="#contact" class="btn btn-primary">Get in touch</a>
+    <a href="#experience" class="btn btn-outline">View my work</a>
+    <a href="resume.pdf" download="Emily_Uehling_Resume.pdf" class="btn btn-outline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;"><path d="M12 16l-4-4h3V4h2v8h3l-4 4z"/><path d="M4 20h16"/></svg>
+      Download Resume
+    </a>
+  </div>
+  <div class="hero-stats fade-up delay-4">
+    <div>
+      <div class="stat-num">$1M+</div>
+      <div class="stat-label">Revenue recovered</div>
+    </div>
+    <div>
+      <div class="stat-num">66%</div>
+      <div class="stat-label">Insurance denial reduction</div>
+    </div>
+    <div>
+      <div class="stat-num">50%+</div>
+      <div class="stat-label">Cardiac denial decrease</div>
+    </div>
+    <div>
+      <div class="stat-num">UiPath</div>
+      <div class="stat-label">Certified Developer</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About me</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Where business meets automation</h2>
+      <p>I'm an RPA Developer and data professional with <strong>5 years of experience</strong> spanning healthcare and enterprise operations. I thrive at the intersection of business and technology — translating complex processes into elegant, automated solutions and turning raw data into decisions that matter.</p>
+      <p>My work has ranged from cutting insurance denials by 66% and recovering over <strong>$1 million in revenue</strong> at Methodist Physicians Clinic, to leading automation initiatives at Conagra Brands across SAP, UiPath, Python, and Databricks. I'm currently spearheading the migration of legacy VBScript workflows to Python — a project I identified and took ownership of from the ground up.</p>
+      <p>What drives me is <strong>meaningful work</strong>. I'm most energized when technology creates real impact for people — particularly in healthcare, where data and automation can genuinely improve patient outcomes and organizational efficiency.</p>
+    </div>
+    <div>
+      <div class="highlight-card">
+        <div class="big-num">$1M+</div>
+        <p>Additional revenue generated by leveraging data analytics to identify and rectify improper insurance denials at Methodist Physicians Clinic.</p>
+      </div>
+      <div class="highlight-card" style="margin-top: 1rem; border-left-color: var(--accent2);">
+        <div class="big-num" style="color: var(--accent2);">66%</div>
+        <p>Reduction in outpatient surgery denials achieved through data-driven process improvements in 2023.</p>
+      </div>
+      <div class="highlight-card" style="margin-top: 1rem; border-left-color: var(--accent3);">
+        <div class="big-num" style="color: var(--accent3);">40+</div>
+        <p>Data sources integrated via Alteryx to build a location-based risk factor model for enterprise-wide audit analytics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical skills</div>
+  <h2>Tools &amp; Technologies</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-label">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">VBScript</span>
+        <span class="skill-tag">PySpark</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Automation & RPA</div>
+      <div class="skill-tags">
+        <span class="skill-tag featured">UiPath ✓ Certified</span>
+        <span class="skill-tag">Power Automate</span>
+        <span class="skill-tag">SAP</span>
+        <span class="skill-tag">ServiceNow</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Data & Analytics</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Databricks</span>
+        <span class="skill-tag">Snowflake</span>
+        <span class="skill-tag">Alteryx</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Healthcare Systems</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Epic</span>
+        <span class="skill-tag">Cerner</span>
+        <span class="skill-tag">AKASA</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">ML & AI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">scikit-learn</span>
+        <span class="skill-tag">PyTorch</span>
+        <span class="skill-tag">YOLO</span>
+        <span class="skill-tag">GPT fine-tuning</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Platforms</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PowerApps</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">Git / GitHub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work history</div>
+  <h2>Experience</h2>
+  <div class="exp-timeline">
+
+    <!-- Conagra -->
+    <div class="exp-company">
+      <div class="exp-company-name">Conagra Brands</div>
+
+      <div class="exp-role">
+        <div class="exp-role-header">
+          <div class="exp-role-title">Business Services Analyst <span style="font-size:0.9rem; color: var(--accent2); font-family: var(--mono);">(RPA Developer)</span></div>
+          <div class="exp-dates">Sept 2025 — Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Automated daily SAP spool extracts using Python and Power Automate to support timely operational analysis and reporting</li>
+          <li>Developed automated workflows for International Deduction Reversals, reducing manual intervention and improving processing accuracy</li>
+          <li>Designed UiPath automations integrated with ServiceNow to retrieve and process purchase order tickets</li>
+          <li>Created Databricks tables to track open Walmart cases, enabling centralized analysis and reporting</li>
+          <li><strong>Identified and led the migration of legacy VBScript workflows to Python</strong> — spearheading the entire transition process independently</li>
+        </ul>
+      </div>
+
+      <div class="exp-role">
+        <div class="exp-role-header">
+          <div class="exp-role-title">Data Analyst — Internal Audit</div>
+          <div class="exp-dates">May 2024 — Sept 2025</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and implemented a Location-Based Risk Factor model integrating <strong>40+ data sources</strong> via Alteryx, aggregated at the plant level</li>
+          <li>Delivered Power BI dashboards to visualize and rank operational risks across all locations</li>
+          <li>Developed and trained custom GPTs on IIA Standards, Plant Risk Assessment, and Audit Methodologies</li>
+          <li>Led quarterly team meetings to present new data products and align analytic initiatives with the audit team</li>
+          <li>Integrated APIs into data workflows to automate real-time access to external data sources</li>
+          <li>Led the Coman Risk Assessment Project, visualizing financials, production data, and associated risks</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Methodist -->
+    <div class="exp-company">
+      <div class="exp-company-name">Methodist Physicians Clinic</div>
+
+      <div class="exp-role">
+        <div class="exp-role-header">
+          <div class="exp-role-title">Data Scientist</div>
+          <div class="exp-dates">May 2023 — May 2024</div>
+        </div>
+        <div class="impact-badge">
+          <svg viewBox="0 0 16 16" fill="currentColor" style="width:12px;height:12px;"><path d="M8 1l1.5 4.5H14l-3.5 2.5 1.5 4.5L8 10l-4 2.5 1.5-4.5L2 5.5h4.5z"/></svg>
+          $1M+ revenue recovered · 66% denial reduction
+        </div>
+        <ul class="exp-bullets">
+          <li><strong>Generated over $1 million in additional revenue</strong> by leveraging data analytics to identify and rectify improper insurance denials</li>
+          <li><strong>Achieved a 66% reduction in outpatient surgery denials</strong> through data-driven process improvements</li>
+          <li>Worked closely with AKASA to integrate machine learning into authorization and eligibility workflows</li>
+          <li>Developed SQL queries to aggregate and analyze large datasets for strategic decision-making</li>
+          <li>Spearheaded cross-departmental collaboration to identify and implement automation opportunities</li>
+        </ul>
+      </div>
+
+      <div class="exp-role">
+        <div class="exp-role-header">
+          <div class="exp-role-title">PreAccess Denials Specialist</div>
+          <div class="exp-dates">May 2022 — May 2023</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Decreased cardiac denials by over 50% through targeted employee education initiatives</li>
+          <li>Created live Tableau dashboards to track denial trends for high-risk departments</li>
+          <li>Compiled and evaluated yearly colonoscopy denials to calculate and analyze revenue impact</li>
+        </ul>
+      </div>
+
+      <div class="early-career">
+        <p style="font-family: var(--mono); font-size: 11px; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Earlier roles at Methodist Physicians Clinic</p>
+        <p>PreAccess Advocate (Sept 2021–May 2022) · Surgery Scheduler (Mar 2020–Sept 2021) · Receptionist (Sept 2019–Mar 2020) — Demonstrated a consistent track record of initiative and growth across administrative, clinical coordination, and patient-facing roles, building deep familiarity with healthcare operations, insurance workflows, and cross-departmental collaboration from the ground up.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon">Computer Vision · In Progress</div>
+      <div class="project-title">Baseball Tracking Model</div>
+      <p class="project-desc">A computer vision system for detecting and tracking the trajectory of moving baseballs in video footage. Uses object detection and annotation pipelines to enable real-time ball tracking across frames — laying the groundwork for pitch analysis and sports analytics applications.</p>
+      <div class="project-stack">
+        <span class="stack-tag">YOLO</span>
+        <span class="stack-tag">PyTorch</span>
+        <span class="stack-tag">CVAT</span>
+        <span class="stack-tag">OpenCV</span>
+        <span class="stack-tag">Python</span>
+      </div>
+      <a href="https://github.com/euehling" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">Machine Learning · In Progress</div>
+      <div class="project-title">Rice Paddy Yield Prediction</div>
+      <p class="project-desc">A multi-model classification system for predicting paddy crop yield (Low / Medium / High) from agricultural datasets. Evaluates three binning strategies — equal-range, domain-based, and quantile — across Random Forest, Decision Tree, and Logistic Regression models with full ROC/AUC analysis.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">scikit-learn</span>
+        <span class="stack-tag">pandas</span>
+        <span class="stack-tag">matplotlib</span>
+        <span class="stack-tag">GridSearchCV</span>
+      </div>
+      <a href="https://github.com/euehling" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">NLP · Healthcare</div>
+      <div class="project-title">IIA Audit GPT</div>
+      <p class="project-desc">Developed and trained custom GPT models on Institute of Internal Auditor (IIA) Standards, Plant Risk Assessment frameworks, and Audit Methodologies — enhancing team efficiency and ensuring compliance with IIA standards across Conagra's internal audit function.</p>
+      <div class="project-stack">
+        <span class="stack-tag">GPT fine-tuning</span>
+        <span class="stack-tag">Prompt Engineering</span>
+        <span class="stack-tag">Internal Audit</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">Data Engineering · Risk</div>
+      <div class="project-title">Location-Based Risk Model</div>
+      <p class="project-desc">Designed and implemented an enterprise-scale risk factor model integrating 40+ data sources via Alteryx, aggregated at the plant level. Delivered as a Power BI dashboard enabling leadership to visualize and weight operational risks across all company locations.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Alteryx</span>
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">Data Modeling</span>
+      </div>
+    </div>
+
+  </div>
+  <div style="margin-top: 2rem;">
+    <a href="https://github.com/euehling" target="_blank" class="btn btn-outline">View all projects on GitHub</a>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education &amp; Certifications</div>
+  <h2>Credentials</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-school">University of Nebraska at Omaha</div>
+      <div class="edu-degree">M.S. in Data Science</div>
+      <div class="edu-detail" style="color: var(--accent); font-family: var(--mono); font-size: 12px;">2024 — 2027 · In Progress</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-school">University of Nebraska at Omaha</div>
+      <div class="edu-degree">B.S. in Multidisciplinary Studies</div>
+      <div class="edu-detail">Concentration: Information Technology</div>
+      <div class="edu-detail" style="font-family: var(--mono); font-size: 12px; color: var(--muted);">2020 — 2022</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-badge">
+        <svg viewBox="0 0 16 16" fill="currentColor" style="width:12px;height:12px;"><path d="M8 1l1.5 4.5H14l-3.5 2.5 1.5 4.5L8 10l-4 2.5 1.5-4.5L2 5.5h4.5z"/></svg>
+        Official Certification
+      </div>
+      <div class="cert-name">UiPath RPA Developer</div>
+      <div class="edu-detail" style="color: var(--muted); margin-top: 0.35rem;">Certified in robotic process automation development, workflow design, and enterprise automation deployment using the UiPath platform.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2>Let's work together</h2>
+  <p class="contact-sub">I'm open to healthcare data and RPA roles where technology drives meaningful outcomes. Feel free to reach out through any of the channels below.</p>
+  <div class="contact-links">
+    <a href="mailto:emily.uehling@gmail.com" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      emily.uehling@gmail.com
+    </a>
+
+    <a href="https://linkedin.com/in/emilyuehling" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/euehling" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      github.com/euehling
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Emily Uehling · RPA Developer &amp; Data Scientist · Omaha, NE</p>
+</footer>
+
+</body>
+</html>
